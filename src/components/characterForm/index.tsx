@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Character, CharacterFormData } from '../../types';
+import React, { useState, useEffect } from "react";
+import { Character, CharacterFormData } from "../../types";
 import {
   FormContainer,
   FormTitle,
@@ -10,8 +10,8 @@ import {
   ButtonGroup,
   SubmitButton,
   CancelButton,
-  ErrorMessage
-} from './styled';
+  ErrorMessage,
+} from "./styled";
 
 interface CharacterFormProps {
   character?: Character | null;
@@ -19,87 +19,87 @@ interface CharacterFormProps {
   onCancel: () => void;
 }
 
-const CharacterForm: React.FC<CharacterFormProps> = ({ 
-  character, 
-  onSubmit, 
-  onCancel 
+const CharacterForm: React.FC<CharacterFormProps> = ({
+  character,
+  onSubmit,
+  onCancel,
 }) => {
   //
   const [formData, setFormData] = useState<CharacterFormData>({
-    name: '',
-    description: '',
-    thumbnailUrl: ''
+    name: "",
+    description: "",
+    thumbnailUrl: "",
   });
-  
+
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  
-  
+
   useEffect(() => {
-    
     if (character) {
       setFormData({
         name: character.name,
         description: character.description,
-        thumbnailUrl: `${character.thumbnail.path}.${character.thumbnail.extension}`
+        thumbnailUrl: `${character.thumbnail.path}.${character.thumbnail.extension}`,
       });
     } else {
-      
       setFormData({
-        name: '',
-        description: '',
-        thumbnailUrl: ''
+        name: "",
+        description: "",
+        thumbnailUrl: "",
       });
     }
   }, [character]);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (errors[name]) {
-      setErrors(prev => {
+      setErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors[name];
         return newErrors;
       });
     }
   };
-  
+
   const validateForm = (): boolean => {
     const newErrors: { [key: string]: string } = {};
-    
+
     if (!formData.name.trim()) {
-      newErrors.name = 'El nombre es obligatorio';
+      newErrors.name = "El nombre es obligatorio";
     }
-    
-    
+
     if (!formData.thumbnailUrl.trim()) {
-      newErrors.thumbnailUrl = 'La URL de la imagen es obligatoria';
+      newErrors.thumbnailUrl = "La URL de la imagen es obligatoria";
     } else {
-      const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-      const urlExtension = formData.thumbnailUrl.split('.').pop() || '';
+      const validExtensions = ["jpg", "jpeg", "png", "gif"];
+      const urlExtension = formData.thumbnailUrl.split(".").pop() || "";
       if (!validExtensions.includes(urlExtension.toLowerCase())) {
-        newErrors.thumbnailUrl = 'La URL debe terminar con una extensión de imagen válida (jpg, jpeg, png, gif)';
+        newErrors.thumbnailUrl =
+          "La URL debe terminar con una extensión de imagen válida (jpg, jpeg, png, gif)";
       }
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSubmit(formData, character?.id);
     }
   };
-  
+
   return (
     <FormContainer>
-      <FormTitle>{character ? 'Editar Personaje' : 'Crear Personaje'}</FormTitle>
-      
+      <FormTitle>
+        {character ? "Editar Personaje" : "Crear Personaje"}
+      </FormTitle>
+
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <Label htmlFor="name">Nombre</Label>
@@ -112,7 +112,7 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
           />
           {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
         </FormGroup>
-        
+
         <FormGroup>
           <Label htmlFor="description">Descripción</Label>
           <TextArea
@@ -122,7 +122,7 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
             onChange={handleChange}
           />
         </FormGroup>
-        
+
         <FormGroup>
           <Label htmlFor="thumbnailUrl">URL de Imagen</Label>
           <Input
@@ -133,15 +133,17 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
             onChange={handleChange}
             placeholder="https://ejemplo.com/imagen.jpg"
           />
-          {errors.thumbnailUrl && <ErrorMessage>{errors.thumbnailUrl}</ErrorMessage>}
+          {errors.thumbnailUrl && (
+            <ErrorMessage>{errors.thumbnailUrl}</ErrorMessage>
+          )}
         </FormGroup>
-        
+
         <ButtonGroup>
           <CancelButton type="button" onClick={onCancel}>
             Cancelar
           </CancelButton>
           <SubmitButton type="submit">
-            {character ? 'Actualizar' : 'Crear'}
+            {character ? "Actualizar" : "Crear"}
           </SubmitButton>
         </ButtonGroup>
       </form>

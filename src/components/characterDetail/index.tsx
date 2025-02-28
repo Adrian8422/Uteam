@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { Character } from '../../types';
+import React, { useEffect } from "react";
+import { Character } from "../../types";
 import {
   Container,
   Header,
   BackButton,
   ActionButton,
-  ButtonsContainer, 
+  ButtonsContainer,
   ContentContainer,
   ImageContainer,
   CharacterImage,
   DetailsContainer,
   Title,
-  Description
-} from './styled';
+  Description,
+} from "./styled";
 
 interface CharacterDetailProps {
   character: Character;
@@ -21,27 +21,24 @@ interface CharacterDetailProps {
   onDelete: () => void;
 }
 
-const CharacterDetail: React.FC<CharacterDetailProps> = ({ 
-  character, 
+const CharacterDetail: React.FC<CharacterDetailProps> = ({
+  character,
   onBack,
   onEdit,
-  onDelete
+  onDelete,
 }) => {
-  
   useEffect(() => {
     document.title = `Marvel App - ${character.name}`;
-    
-    
+
     return () => {
-      document.title = 'Marvel App';
+      document.title = "Marvel App";
     };
   }, [character]);
-  
-  
+
   useEffect(() => {
-    console.log('Character detail updated', character.id);
+    console.log("Character detail updated", character.id);
   }, [character]);
-  
+
   return (
     <Container>
       <Header>
@@ -51,19 +48,20 @@ const CharacterDetail: React.FC<CharacterDetailProps> = ({
           <ActionButton onClick={onDelete}>Eliminar</ActionButton>
         </ButtonsContainer>
       </Header>
-      
+
       <ContentContainer>
         <ImageContainer>
-          <CharacterImage 
-            src={`${character.thumbnail.path}.${character.thumbnail.extension}`} 
-            alt={character.name} 
+          <CharacterImage
+            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+            alt={character.name}
           />
         </ImageContainer>
-        
+
         <DetailsContainer>
           <Title>{character.name}</Title>
           <Description>
-            {character.description || 'No hay descripción disponible para este personaje.'}
+            {character.description ||
+              "No hay descripción disponible para este personaje."}
           </Description>
         </DetailsContainer>
       </ContentContainer>

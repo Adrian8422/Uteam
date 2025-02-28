@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 20px;
@@ -19,7 +19,7 @@ export const Card = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
   cursor: pointer;
-  
+
   &:hover {
     transform: translateY(-5px);
   }
@@ -48,7 +48,7 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   margin-right: 10px;
-  
+
   &:hover {
     background-color: #c61a1f;
   }
@@ -65,8 +65,7 @@ export const HeaderContainer = styled.div`
   transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   &:hover {
-    background:rgba(216, 52, 52, 0.6);
-    
+    background: rgba(216, 52, 52, 0.6);
   }
 
   @media (max-width: 768px) {
@@ -74,4 +73,30 @@ export const HeaderContainer = styled.div`
     gap: 10px;
     text-align: center;
   }
+`;
+
+export const ContainerButton = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+`;
+
+export const ButtonPag = styled.button`
+  background-color: #e62429;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c61a1f;
+  }
+`;
+export const PageNumber = styled.span`
+  padding: 10px;
+  font-size: 1rem;
+  color: black;
 `;

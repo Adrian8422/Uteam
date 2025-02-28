@@ -7,10 +7,10 @@ const breakpoints = {
 };
 
 export const Container = styled.div`
-  max-width: 1200px; 
-  margin: 0 auto; 
-  padding: 20px; 
-  width: 100%; 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -118,6 +118,9 @@ export const CharacterImage = styled.img`
 `;
 
 export const DetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   width: 100%;
 
   @media (min-width: ${breakpoints.laptop}) {
