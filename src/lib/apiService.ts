@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Character, CharacterFormData } from '../types';
 import md5 from 'md5';
 
-const baseURL = 'http://gateway.marvel.com/v1/public';
+const baseURL = 'https://gateway.marvel.com/v1/public';
 const publicKey = process.env.REACT_APP_MARVEL_API_PUBLIC_KEY || '';
 const privateKey = process.env.REACT_APP_MARVEL_API_PRIVATE_KEY || '';
 
